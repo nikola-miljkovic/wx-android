@@ -25,36 +25,27 @@ jint
 Java_com_example_hellojni_wxJNI_wxStart( JNIEnv* env,
 													  jobject thiz )
 {
-	// MACHINE GENERATED DO NOT TOUCH
+    // MACHINE GENERATED DO NOT TOUCH
     set_jni_id(0);
+
+	wxAndroidApp::JNIEnv = env;
+	wxAndroidApp::Activity = &thiz;
 
 	jclass this_c = env->GetObjectClass(thiz);
 	jclass cl_ll = env->FindClass("android/widget/LinearLayout");
-	jclass cl = env->FindClass("android/widget/Button");
 
-	if( cl == NULL || cl_ll == NULL )
-		return 1;
+	wxButton* btn = new wxButton();
+	btn->SetLabel("wxWidgets");
 
 	jmethodID construct = env->GetMethodID(cl_ll, "<init>", "(Landroid/content/Context;)V");
 	jmethodID add_view = env->GetMethodID(cl_ll, "addView", "(Landroid/view/View;)V");
-	jmethodID b_construct = env->GetMethodID(cl, "<init>", "(Landroid/content/Context;)V");
-	jmethodID b_set_text = env->GetMethodID(cl, "setText", "(Ljava/lang/CharSequence;)V");
 	jmethodID setContent = env->GetMethodID(this_c, "setContentView", "(Landroid/view/View;)V");
 
 	// construct layout and button
 	jobject c = env->NewObject(cl_ll, construct, thiz);
-	jobject s = env->NewObject(cl, b_construct, thiz);
 
-
-	env->CallVoidMethod(s, b_set_text, env->NewStringUTF("wxWidgets"));
-	env->CallVoidMethod(c, add_view, s);
+	env->CallVoidMethod(c, add_view, (jobject)(*btn));
 	env->CallVoidMethod(thiz, setContent, c);
 
-	if ( s != NULL )
-		return 32;
-
 	return 0;
-	// .class file data.??
-	//jclass DefineClass(JNIEnv *env, const char *name, jobject loader,
-	//const jbyte *buf, jsize bufLen);
 }

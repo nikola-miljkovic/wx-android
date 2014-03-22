@@ -16,7 +16,7 @@
  */
 #include <jni.h>
 #include <string.h>
-#include <wxandroid/wxAndroid.cpp>
+#include <wxandroid/button.cpp>
 
 #ifndef __wx_jni
 #define __wx_jni
