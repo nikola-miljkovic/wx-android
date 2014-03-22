@@ -38,9 +38,7 @@ Java_com_example_hellojni_wxJNI_wxStart( JNIEnv* env,
 	jmethodID construct = env->GetMethodID(cl_ll, "<init>", "(Landroid/content/Context;)V");
 	jmethodID add_view = env->GetMethodID(cl_ll, "addView", "(Landroid/view/View;)V");
 	jmethodID b_construct = env->GetMethodID(cl, "<init>", "(Landroid/content/Context;)V");
-	// need implementation of NATIVE CharSequence
-	//jmethodID b_set_text = env->GetMethodID(cl, "setText", "(Ljava/lang/CharSequence;)V");
-	jmethodID b_set_text = env->GetMethodID(cl, "setText", "([CII)V");
+	jmethodID b_set_text = env->GetMethodID(cl, "setText", "(Ljava/lang/CharSequence;)V");
 	jmethodID setContent = env->GetMethodID(this_c, "setContentView", "(Landroid/view/View;)V");
 
 	// construct layout and button
@@ -48,7 +46,7 @@ Java_com_example_hellojni_wxJNI_wxStart( JNIEnv* env,
 	jobject s = env->NewObject(cl, b_construct, thiz);
 
 
-	// see char seq implementation env->CallVoidMethod(s, b_set_text, "wxWidgets");
+	env->CallVoidMethod(s, b_set_text, env->NewStringUTF("wxWidgets"));
 	env->CallVoidMethod(c, add_view, s);
 	env->CallVoidMethod(thiz, setContent, c);
 
