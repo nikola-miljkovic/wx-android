@@ -18,6 +18,7 @@
 #include <string.h>
 #include <wxandroid/button.cpp>
 #include <wxandroid/textctrl.cpp>
+#include <android/log.h>
 
 #ifndef __wx_jni
 #define __wx_jni
@@ -43,11 +44,10 @@ extern "C" {
 	#define ABI "unknown"
 #endif
 
-/*
- * MACHINE GENERATED DON'T TOUCH
- */
 
-void set_jni_id(int i) { int id = 0; };
+#define LOGI(...) ((void)__android_log_print(ANDROID_LOG_INFO, "native-activity", __VA_ARGS__))
+#define LOGW(...) ((void)__android_log_print(ANDROID_LOG_WARN, "native-activity", __VA_ARGS__))
+
 
 /* This is a trivial JNI example where we use a native method
  * to return a new VM String. See the corresponding Java source

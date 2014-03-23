@@ -25,9 +25,6 @@ jint
 Java_com_example_hellojni_wxJNI_wxStart( JNIEnv* env,
 													  jobject thiz ,jstring label)
 {
-    // MACHINE GENERATED DO NOT TOUCH
-    set_jni_id(0);
-
 	wxAndroidApp::JNIEnv = env;
 	wxAndroidApp::Activity = &thiz;
 
