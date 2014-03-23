@@ -10,7 +10,7 @@ class wxButton : wxAndroidObject
 public:
 	wxButton();
 
-	void SetLabel(const char* label);
+	void SetLabel(jstring label);
 
 	operator jobject() { return m_object; }
 };

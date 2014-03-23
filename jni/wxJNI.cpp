@@ -23,7 +23,7 @@
  */
 jint
 Java_com_example_hellojni_wxJNI_wxStart( JNIEnv* env,
-													  jobject thiz )
+													  jobject thiz ,jstring label)
 {
     // MACHINE GENERATED DO NOT TOUCH
     set_jni_id(0);
@@ -35,7 +35,7 @@ Java_com_example_hellojni_wxJNI_wxStart( JNIEnv* env,
 	jclass cl_ll = env->FindClass("android/widget/LinearLayout");
 
 	wxButton* btn = new wxButton();
-	btn->SetLabel("wxWidgets");
+	btn->SetLabel(label);
 
 	jmethodID construct = env->GetMethodID(cl_ll, "<init>", "(Landroid/content/Context;)V");
 	jmethodID add_view = env->GetMethodID(cl_ll, "addView", "(Landroid/view/View;)V");

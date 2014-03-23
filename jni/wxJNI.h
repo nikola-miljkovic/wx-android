@@ -58,7 +58,7 @@ void set_jni_id(int i) { int id = 0; };
 
 jint
 Java_com_example_hellojni_wxJNI_wxStart( JNIEnv* env,
-													  jobject thiz );
+													  jobject thiz ,jstring label);
 
 
 #ifdef __cplusplus
