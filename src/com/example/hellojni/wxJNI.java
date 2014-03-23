@@ -33,12 +33,12 @@ public class wxJNI extends Activity
          * the text is retrieved by calling a native
          * function.
          */
-        int i = wxStart();
+        int i = wxStart("wxButton");
         System.out.println(i);
     }
 
     
-    private native int wxStart();
+    private native int wxStart(String label);
     
     static {
         System.loadLibrary("wxJNI");
