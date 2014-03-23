@@ -50,3 +50,12 @@ Java_com_example_hellojni_wxJNI_wxStart( JNIEnv* env,
 
 	return 0;
 }
+
+jint
+Java_com_example_hellojni_wxJNI_handleEvent( JNIEnv* env,
+													  jobject thiz,
+													  jint code,
+													  jobject obj)
+{
+	LOGW("EVENT");
+}

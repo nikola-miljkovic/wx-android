@@ -16,12 +16,13 @@
 package com.example.hellojni;
 
 import android.app.Activity;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.TextView;
 import android.os.Bundle;
 
 
-public class wxJNI extends Activity
-{
+public class wxJNI extends Activity implements OnClickListener  {
 	
     /** Called when the activity is first created. */
     @Override
@@ -39,8 +40,15 @@ public class wxJNI extends Activity
 
     
     private native int wxStart(String label);
+    // not sure if static actually does anything here?
+    public static native int handleEvent(int code, Object obj);
     
     static {
         System.loadLibrary("wxJNI");
     }   
+    
+    @Override
+	public void onClick(View arg0) {
+		handleEvent(1, arg0);
+	}
 }

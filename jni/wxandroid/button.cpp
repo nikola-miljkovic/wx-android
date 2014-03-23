@@ -9,9 +9,8 @@ wxButton::wxButton()
             
     if(m_object)
 	{
-		jclass e_handler = env->FindClass("com/example/hellojni/EventHandler");
 		jmethodID set_listener = env->GetMethodID(m_class, "setOnClickListener", "(Landroid/view/View$OnClickListener;)V");
-		env->CallVoidMethod(m_object, set_listener, e_handler);
+		env->CallVoidMethod(m_object, set_listener, (*wxAndroidApp::Activity));
 	}
 }
 
