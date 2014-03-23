@@ -17,4 +17,8 @@
 #define BIND_BUTTON 			"android/widget/Button"
 
 #define BIND_BUTTON_CONSTRUCTOR_ARGS "(Landroid/content/Context;)V"
+
+#define BIND_TEXTCTRL "android/widget/TextView"
+
+#define BIND_TEXTCTRL_CONSTRUCTOR_ARGS "(Landroid/content/Context;)V"
 #endif // __android_def

@@ -37,6 +37,9 @@ Java_com_example_hellojni_wxJNI_wxStart( JNIEnv* env,
 	wxButton* btn = new wxButton();
 	btn->SetLabel(label);
 
+	wxTextCtrl* textctrl=new wxTextCtrl();
+	textctrl->SetText(label);
+
 	jmethodID construct = env->GetMethodID(cl_ll, "<init>", "(Landroid/content/Context;)V");
 	jmethodID add_view = env->GetMethodID(cl_ll, "addView", "(Landroid/view/View;)V");
 	jmethodID setContent = env->GetMethodID(this_c, "setContentView", "(Landroid/view/View;)V");
@@ -45,6 +48,7 @@ Java_com_example_hellojni_wxJNI_wxStart( JNIEnv* env,
 	jobject c = env->NewObject(cl_ll, construct, thiz);
 
 	env->CallVoidMethod(c, add_view, (jobject)(*btn));
+	env->CallVoidMethod(c, add_view, (jobject)(*textctrl));
 	env->CallVoidMethod(thiz, setContent, c);
 
 	return 0;
