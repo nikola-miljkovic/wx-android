@@ -21,6 +21,12 @@
  *
  *   apps/samples/hello-jni/project/src/com/example/hellojni/HelloJni.java
  */
+
+wxButton* btn;
+wxButton* btn2;
+
+jobject* c;
+
 jint
 Java_com_example_hellojni_wxJNI_wxStart( JNIEnv* env,
 													  jobject thiz ,jstring label)
@@ -31,10 +37,13 @@ Java_com_example_hellojni_wxJNI_wxStart( JNIEnv* env,
 	jclass this_c = env->GetObjectClass(thiz);
 	jclass cl_ll = env->FindClass("android/widget/LinearLayout");
 
-	wxButton* btn = new wxButton();
+	btn = new wxButton();
 	btn->SetLabel(label);
 
-	wxTextCtrl* textctrl=new wxTextCtrl();
+	btn2 = new wxButton();
+	btn2->SetLabel(label);
+
+	wxTextCtrl* textctrl= new wxTextCtrl();
 	textctrl->SetText(label);
 
 	jmethodID construct = env->GetMethodID(cl_ll, "<init>", "(Landroid/content/Context;)V");
@@ -42,20 +51,27 @@ Java_com_example_hellojni_wxJNI_wxStart( JNIEnv* env,
 	jmethodID setContent = env->GetMethodID(this_c, "setContentView", "(Landroid/view/View;)V");
 
 	// construct layout and button
-	jobject c = env->NewObject(cl_ll, construct, thiz);
+	jobject c_l = env->NewObject(cl_ll, construct, thiz);
+	c = &c_l;
 
-	env->CallVoidMethod(c, add_view, (jobject)(*btn));
-	env->CallVoidMethod(c, add_view, (jobject)(*textctrl));
-	env->CallVoidMethod(thiz, setContent, c);
+	env->CallVoidMethod(*c, add_view, (jobject)(*btn));
+	env->CallVoidMethod(*c, add_view, (jobject)(*btn2));
+	env->CallVoidMethod(*c, add_view, (jobject)(*textctrl));
+	env->CallVoidMethod(thiz, setContent, *c);
 
 	return 0;
 }
 
-jint
+void
 Java_com_example_hellojni_wxJNI_handleEvent( JNIEnv* env,
 													  jobject thiz,
 													  jint code,
 													  jobject obj)
 {
-	LOGW("EVENT");
+	wxAndroidApp::JNIEnv = env;
+	if(obj == (jobject)(*btn) && code == 1)
+		btn->SetLabel(env->NewStringUTF("Event one"));
+	if(obj == (jobject)(*btn2) && code == 1) {
+		btn2->SetLabel(env->NewStringUTF("Event two"));
+	}
 }

@@ -41,7 +41,7 @@ public class wxJNI extends Activity implements OnClickListener  {
     
     private native int wxStart(String label);
     // not sure if static actually does anything here?
-    public static native int handleEvent(int code, Object obj);
+    public native void handleEvent(int code, Object obj);
     
     static {
         System.loadLibrary("wxJNI");

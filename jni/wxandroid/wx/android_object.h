@@ -8,6 +8,7 @@ class wxAndroidObject
 public:
 	// BIND_DROID
 	//wxAndroidObject(const char* bind);
+
 	jobject m_object;
 	jclass m_class;
 };

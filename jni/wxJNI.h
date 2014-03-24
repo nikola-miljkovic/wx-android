@@ -62,7 +62,7 @@ Java_com_example_hellojni_wxJNI_wxStart( JNIEnv* env,
 													  jobject thiz ,jstring label);
 
 
-jint
+void
 Java_com_example_hellojni_wxJNI_handleEvent( JNIEnv* env,
 													  jobject thiz,
 													  jint code,

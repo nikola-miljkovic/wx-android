@@ -18,5 +18,5 @@ void wxButton::SetLabel(jstring label)
 {
 	JNIEnv* env = wxAndroidApp::JNIEnv;
 	jmethodID method = env->GetMethodID(m_class, "setText", "(Ljava/lang/CharSequence;)V");
-	env->CallVoidMethod(m_object, method,label);
+	env->CallVoidMethod(m_object, method, label);
 }
