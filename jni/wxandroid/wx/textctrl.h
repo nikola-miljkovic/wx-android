@@ -11,7 +11,6 @@ class wxTextCtrl : wxAndroidObject
 {
     public:
         wxTextCtrl();
-
 	    void SetText(jstring text);
 
 	    operator jobject() { return m_object; }

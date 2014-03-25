@@ -24,6 +24,7 @@
 
 wxButton* btn;
 wxButton* btn2;
+wxTextCtrl* textctrl;
 
 jobject* c;
 
@@ -38,12 +39,12 @@ Java_com_example_hellojni_wxJNI_wxStart( JNIEnv* env,
 	jclass cl_ll = env->FindClass("android/widget/LinearLayout");
 
 	btn = new wxButton();
-	btn->SetLabel(label);
+	btn->SetLabel(env->NewStringUTF("Button one"));
 
 	btn2 = new wxButton();
-	btn2->SetLabel(label);
+	btn2->SetLabel(env->NewStringUTF("Button two"));
 
-	wxTextCtrl* textctrl= new wxTextCtrl();
+	textctrl= new wxTextCtrl();
 	textctrl->SetText(label);
 
 	jmethodID construct = env->GetMethodID(cl_ll, "<init>", "(Landroid/content/Context;)V");
@@ -69,9 +70,8 @@ Java_com_example_hellojni_wxJNI_handleEvent( JNIEnv* env,
 													  jobject obj)
 {
 	wxAndroidApp::JNIEnv = env;
-	if(obj == (jobject)(*btn) && code == 1)
-		btn->SetLabel(env->NewStringUTF("Event one"));
-	if(obj == (jobject)(*btn2) && code == 1) {
-		btn2->SetLabel(env->NewStringUTF("Event two"));
-	}
+	if(env->IsSameObject(obj, (jobject)(*btn)) && code == 1)
+		textctrl->SetText(env->NewStringUTF("Event one"));
+	if(env->IsSameObject(obj, (jobject)(*btn2)) && code == 1)
+		textctrl->SetText(env->NewStringUTF("Event two"));
 }

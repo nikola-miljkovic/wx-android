@@ -11,9 +11,8 @@ wxTextCtrl::wxTextCtrl()
 {
 	JNIEnv* env = wxAndroidApp::JNIEnv;
 	m_class = env->FindClass(BIND_TEXTCTRL);
-	m_object = env->NewObject(m_class, env->GetMethodID(m_class,
-			"<init>", BIND_TEXTCTRL_CONSTRUCTOR_ARGS), (*wxAndroidApp::Activity));
-
+	m_object = env->NewGlobalRef(env->NewObject(m_class, env->GetMethodID(m_class,
+			"<init>", BIND_TEXTCTRL_CONSTRUCTOR_ARGS), (*wxAndroidApp::Activity)));
 }
 
 void wxTextCtrl::SetText(jstring text)
