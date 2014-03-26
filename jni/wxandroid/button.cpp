@@ -5,12 +5,12 @@ wxButton::wxButton()
 	JNIEnv* env = wxAndroidApp::JNIEnv;
 	m_class = env->FindClass(BIND_BUTTON);
 	m_object = env->NewGlobalRef(env->NewObject(m_class, env->GetMethodID(m_class,
-			"<init>", BIND_BUTTON_CONSTRUCTOR_ARGS), (*wxAndroidApp::Activity)));
+			"<init>", BIND_BUTTON_CONSTRUCTOR_ARGS), wxAndroidApp::Activity));
 
     if(m_object)
 	{
 		jmethodID set_listener = env->GetMethodID(m_class, "setOnClickListener", "(Landroid/view/View$OnClickListener;)V");
-		env->CallVoidMethod(m_object, set_listener, (*wxAndroidApp::Activity));
+		env->CallVoidMethod(m_object, set_listener, wxAndroidApp::Activity);
 	}
 }
 

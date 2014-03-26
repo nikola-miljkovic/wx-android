@@ -33,7 +33,7 @@ Java_com_example_hellojni_wxJNI_wxStart( JNIEnv* env,
 													  jobject thiz ,jstring label)
 {
 	wxAndroidApp::JNIEnv = env;
-	wxAndroidApp::Activity = &thiz;
+	wxAndroidApp::Activity = env->NewGlobalRef(thiz);
 
 	jclass this_c = env->GetObjectClass(thiz);
 	jclass cl_ll = env->FindClass("android/widget/LinearLayout");
@@ -50,14 +50,16 @@ Java_com_example_hellojni_wxJNI_wxStart( JNIEnv* env,
 	jmethodID construct = env->GetMethodID(cl_ll, "<init>", "(Landroid/content/Context;)V");
 	jmethodID add_view = env->GetMethodID(cl_ll, "addView", "(Landroid/view/View;)V");
 	jmethodID setContent = env->GetMethodID(this_c, "setContentView", "(Landroid/view/View;)V");
-
+	jmethodID setOrientation = env->GetMethodID(cl_ll, "setOrientation", "(I)V");
 	// construct layout and button
 	jobject c_l = env->NewObject(cl_ll, construct, thiz);
 	c = &c_l;
 
+	env->CallVoidMethod(*c, setOrientation, 1);
+	env->CallVoidMethod(*c, add_view, (jobject)(*textctrl));
 	env->CallVoidMethod(*c, add_view, (jobject)(*btn));
 	env->CallVoidMethod(*c, add_view, (jobject)(*btn2));
-	env->CallVoidMethod(*c, add_view, (jobject)(*textctrl));
+
 	env->CallVoidMethod(thiz, setContent, *c);
 
 	return 0;
@@ -69,9 +71,12 @@ Java_com_example_hellojni_wxJNI_handleEvent( JNIEnv* env,
 													  jint code,
 													  jobject obj)
 {
-	wxAndroidApp::JNIEnv = env;
+	if(!wxAndroidApp::Activity)
+		return;
 	if(env->IsSameObject(obj, (jobject)(*btn)) && code == 1)
 		textctrl->SetText(env->NewStringUTF("Event one"));
-	if(env->IsSameObject(obj, (jobject)(*btn2)) && code == 1)
+	else if(env->IsSameObject(obj, (jobject)(*btn2)) && code == 1)
 		textctrl->SetText(env->NewStringUTF("Event two"));
+	else if(code == 2)
+		textctrl->SetText(env->NewStringUTF("Event three"));
 }

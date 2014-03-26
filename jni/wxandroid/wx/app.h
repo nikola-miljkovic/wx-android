@@ -3,5 +3,5 @@
 namespace wxAndroidApp
 {
 	JNIEnv* JNIEnv;
-	jobject* Activity;
+	jobject Activity;
 };

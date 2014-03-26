@@ -16,6 +16,7 @@
 package com.example.hellojni;
 
 import android.app.Activity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
@@ -51,4 +52,12 @@ public class wxJNI extends Activity implements OnClickListener  {
 	public void onClick(View arg0) {
 		handleEvent(1, arg0);
 	}
+    
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+    	// lets imagine it gets processed
+    	// unpack event ->
+    	handleEvent(2, null);
+    	return true;
+    }
 }
