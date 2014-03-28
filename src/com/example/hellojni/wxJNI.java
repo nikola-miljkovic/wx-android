@@ -19,11 +19,10 @@ import android.app.Activity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.TextView;
 import android.os.Bundle;
 
 
-public class wxJNI extends Activity implements OnClickListener  {
+public class wxJNI extends Activity implements OnClickListener {
 	
     /** Called when the activity is first created. */
     @Override
@@ -42,7 +41,7 @@ public class wxJNI extends Activity implements OnClickListener  {
     
     private native int wxStart(String label);
     // not sure if static actually does anything here?
-    public native void handleEvent(int code, Object obj);
+    public native float handleEvent(int code, Object obj);
     
     static {
         System.loadLibrary("wxJNI");
@@ -53,11 +52,9 @@ public class wxJNI extends Activity implements OnClickListener  {
 		handleEvent(1, arg0);
 	}
     
-    @Override
+   @Override
     public boolean onTouchEvent(MotionEvent event) {
-    	// lets imagine it gets processed
-    	// unpack event ->
-    	handleEvent(2, null);
-    	return true;
+    	handleEvent(2, event);
+     	return true;
     }
 }
