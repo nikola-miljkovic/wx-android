@@ -15,17 +15,9 @@
  *
  */
 #include <wxJNI.h>
-/* This is a trivial JNI example where we use a native method
- * to return a new VM String. See the corresponding Java source
- * file located at:
- *
- *   apps/samples/hello-jni/project/src/com/example/hellojni/HelloJni.java
- */
-
 wxButton* btn;
 wxButton* btn2;
 wxTextCtrl* textctrl;
-
 jobject* c;
 
 jint
@@ -55,28 +47,52 @@ Java_com_example_hellojni_wxJNI_wxStart( JNIEnv* env,
 	jobject c_l = env->NewObject(cl_ll, construct, thiz);
 	c = &c_l;
 
+	//Instantiates a wxNotificationMsg object with the desired text and duration
+	wxNotificationMsg* newNotification=new wxNotificationMsg(env->NewStringUTF("wxNotificationMsg"),NOTIFICATION_DURATION_SHORT);
+
 	env->CallVoidMethod(*c, setOrientation, 1);
 	env->CallVoidMethod(*c, add_view, (jobject)(*textctrl));
 	env->CallVoidMethod(*c, add_view, (jobject)(*btn));
 	env->CallVoidMethod(*c, add_view, (jobject)(*btn2));
 
 	env->CallVoidMethod(thiz, setContent, *c);
+	//Shows the previously constructed wxNotificationMsg
+	newNotification->show();
 
 	return 0;
 }
 
 void
-Java_com_example_hellojni_wxJNI_handleEvent( JNIEnv* env,
-													  jobject thiz,
-													  jint code,
-													  jobject obj)
+Java_com_example_hellojni_wxJNI_handleEvent( JNIEnv* env,jobject thiz,
+													  jint code,jobject obj)
 {
 	if(!wxAndroidApp::Activity)
 		return;
-	if(env->IsSameObject(obj, (jobject)(*btn)) && code == 1)
-		textctrl->SetText(env->NewStringUTF("Event one"));
-	else if(env->IsSameObject(obj, (jobject)(*btn2)) && code == 1)
-		textctrl->SetText(env->NewStringUTF("Event two"));
-	else if(code == 2)
-		textctrl->SetText(env->NewStringUTF("Event three"));
+	switch(code)
+	{
+	    case 1:
+	        if(env->IsSameObject(obj,jobject(*btn)))
+	        {
+	        	textctrl->SetText(env->NewStringUTF("Event one"));
+	        	wxNotificationMsg* EventNotification=new wxNotificationMsg(env->NewStringUTF("Event one"),NOTIFICATION_DURATION_LONG);
+	        	EventNotification->show();
+	        }
+		    else if(env->IsSameObject(obj,jobject(*btn2)))
+		    {
+		    	textctrl->SetText(env->NewStringUTF("Event two"));
+		    	wxNotificationMsg* EventNotification=new wxNotificationMsg(env->NewStringUTF("Event two"),NOTIFICATION_DURATION_LONG);
+	        	EventNotification->show();
+		    }
+	        break;
+	    default:
+			textctrl->SetText(env->NewStringUTF("Generic touch event"));
+			wxMotionEvent* TouchEvent=new wxMotionEvent(obj);
+			(void)TouchEvent->getRawX();
+			(void)TouchEvent->getRawY();
+			wxNotificationMsg* EventNotification=new wxNotificationMsg(env->NewStringUTF("Generic touch event"),NOTIFICATION_DURATION_LONG);
+		    EventNotification->show();
+		    break;
+
+	}
+
 }

@@ -21,4 +21,13 @@
 #define BIND_TEXTCTRL "android/widget/TextView"
 
 #define BIND_TEXTCTRL_CONSTRUCTOR_ARGS "(Landroid/content/Context;)V"
+
+
+#define BIND_TOAST "android/widget/Toast"
+
+//Not being used currently but has been defined for uniformity
+#define BIND_TOAST_CONSTRUCTOR_ARGS "(Landroid/content/Context;)V"
+
+//binding to the MotionEvent class for unpacking Motion Events and aiding in handling of Touch Events
+#define BIND_MOTION_EVENT "android/view/MotionEvent"
 #endif // __android_def

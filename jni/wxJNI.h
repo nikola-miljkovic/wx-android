@@ -18,6 +18,8 @@
 #include <string.h>
 #include <wxandroid/button.cpp>
 #include <wxandroid/textctrl.cpp>
+#include <wxandroid/notificationmsg.cpp>
+#include <wxandroid/motionevent.cpp>
 #include <android/log.h>
 
 #ifndef __wx_jni
