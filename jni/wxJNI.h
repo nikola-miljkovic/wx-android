@@ -15,6 +15,7 @@
  *
  */
 #include <jni.h>
+#include <stdio.h>
 #include <string.h>
 #include <wxandroid/button.cpp>
 #include <wxandroid/textctrl.cpp>

@@ -15,10 +15,12 @@
  *
  */
 #include <wxJNI.h>
+
 wxButton* btn;
 wxButton* btn2;
 wxTextCtrl* textctrl;
 jobject* c;
+char coords[32];
 
 jint
 Java_com_example_hellojni_wxJNI_wxStart( JNIEnv* env,
@@ -66,8 +68,6 @@ void
 Java_com_example_hellojni_wxJNI_handleEvent( JNIEnv* env,jobject thiz,
 													  jint code,jobject obj)
 {
-	if(!wxAndroidApp::Activity)
-		return;
 	switch(code)
 	{
 	    case 1:
@@ -85,11 +85,10 @@ Java_com_example_hellojni_wxJNI_handleEvent( JNIEnv* env,jobject thiz,
 		    }
 	        break;
 	    default:
-			textctrl->SetText(env->NewStringUTF("Generic touch event"));
 			wxMotionEvent* TouchEvent=new wxMotionEvent(obj);
-			(void)TouchEvent->getRawX();
-			(void)TouchEvent->getRawY();
-			wxNotificationMsg* EventNotification=new wxNotificationMsg(env->NewStringUTF("Generic touch event"),NOTIFICATION_DURATION_LONG);
+			sprintf(coords, "X: %f Y: %f", TouchEvent->getRawX(), TouchEvent->getRawY());
+			textctrl->SetText(env->NewStringUTF(coords));
+			wxNotificationMsg* EventNotification=new wxNotificationMsg(env->NewStringUTF("Generic touch event"),NOTIFICATION_DURATION_SHORT);
 		    EventNotification->show();
 		    break;
 
