@@ -7,24 +7,21 @@
 
 #include <wxandroid/wx/motionevent.h>
 
-wxMotionEvent::wxMotionEvent(jobject obj)
+wxMotionEvent::wxMotionEvent()
 {
-	JNIEnv* env = wxAndroidApp::JNIEnv;
-	m_class=env->FindClass(BIND_MOTION_EVENT);
-	m_object=obj;
 }
 
 jfloat wxMotionEvent::getRawX()
 {
 	JNIEnv* env = wxAndroidApp::JNIEnv;
-	jmethodID getRawXMethod = env->GetMethodID(m_class, "getRawX", "()F");
+	jmethodID getRawXMethod = env->GetMethodID(env->GetObjectClass(m_object), "getRawX", "()F");
 	return env->CallFloatMethod(m_object,getRawXMethod);
 }
 
 jfloat wxMotionEvent::getRawY()
 {
 	JNIEnv* env = wxAndroidApp::JNIEnv;
-	jmethodID getRawYMethod = env->GetMethodID(m_class, "getRawY", "()F");
+	jmethodID getRawYMethod = env->GetMethodID(env->GetObjectClass(m_object), "getRawY", "()F");
 	return env->CallFloatMethod(m_object,getRawYMethod);
 }
 

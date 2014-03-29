@@ -15,9 +15,11 @@
 class wxMotionEvent : wxAndroidObject
 {
     public:
-        wxMotionEvent(jobject obj);
+        wxMotionEvent();
 	    jfloat getRawX();
 	    jfloat getRawY();
+
+	    void setObject(jobject object) { m_object = object; }
 	    operator jobject() { return m_object; }
 };
 

@@ -19,6 +19,7 @@
 wxButton* btn;
 wxButton* btn2;
 wxTextCtrl* textctrl;
+wxMotionEvent* TouchEvent;
 jmethodID add_view;
 jclass cl_ll;
 jobject c_l;
@@ -63,6 +64,7 @@ Java_com_example_hellojni_wxJNI_wxStart( JNIEnv* env,
 	//Shows the previously constructed wxNotificationMsg
 	newNotification->show();
 
+	TouchEvent = new wxMotionEvent();
 	return 0;
 }
 
@@ -92,7 +94,7 @@ Java_com_example_hellojni_wxJNI_handleEvent( JNIEnv* env,jobject thiz,
 		    }
 	        break;
 	    default:
-			wxMotionEvent* TouchEvent=new wxMotionEvent(obj);
+	    	TouchEvent->setObject(obj);
 			sprintf(coords, "X: %f Y: %f", TouchEvent->getRawX(), TouchEvent->getRawY());
 			textctrl->SetText(env->NewStringUTF(coords));
 			wxNotificationMsg* EventNotification=new wxNotificationMsg(env->NewStringUTF("Generic touch event"),NOTIFICATION_DURATION_SHORT);
