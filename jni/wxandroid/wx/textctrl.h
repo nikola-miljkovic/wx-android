@@ -11,6 +11,9 @@ class wxTextCtrl : wxAndroidObject
 {
     public:
         wxTextCtrl();
+        ~wxTextCtrl()
+        { wxAndroidApp::JNIEnv->DeleteGlobalRef(m_object); }
+
 	    void SetText(jstring text);
 
 	    operator jobject() { return m_object; }
