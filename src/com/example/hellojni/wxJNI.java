@@ -37,7 +37,8 @@ public class wxJNI extends Activity implements OnClickListener {
          * the text is retrieved by calling a native
          * function.
          */
-       
+        
+        
         int i = wxStart("wxButton");
         System.out.println(i);
     }
@@ -65,11 +66,6 @@ public class wxJNI extends Activity implements OnClickListener {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
     	onCreateOMenu(menu);
-    	/*MenuItem a = menu.add(0, 0, 0, "HI");
-    	a.setCheckable(true);
-		a.setChecked(false);*/
-		//a.setOnMenuItemClickListener();
-		
 		return true;
 	}
 }

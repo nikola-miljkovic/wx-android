@@ -33,6 +33,7 @@ Java_com_example_hellojni_wxJNI_wxStart( JNIEnv* env,
 {
 	wxAndroidApp::JNIEnv = env;
 	wxAndroidApp::Activity = env->NewGlobalRef(thiz);
+	wxAndroidApp::OptionsMenuClick = NULL;
 
 	jclass this_c = env->GetObjectClass(thiz);
 	cl_ll = env->FindClass("android/widget/LinearLayout");
@@ -112,6 +113,7 @@ Java_com_example_hellojni_wxJNI_onCreateOMenu( JNIEnv* env,jobject thiz,
 {
 	// Here we should read our data from setMenu(xxx); and add them all op to obj, however for show off purpose we don't do that at all :(
 	wxAndroidApp::JNIEnv = env;
+
 	menu->setObject(obj);
 	menu->AppendCheckItem(0, env->NewStringUTF("Hello wxMenu"));
 }

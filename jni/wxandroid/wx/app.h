@@ -4,4 +4,5 @@ namespace wxAndroidApp
 {
 	JNIEnv* JNIEnv;
 	jobject Activity;
+	jobject OptionsMenuClick;
 };
