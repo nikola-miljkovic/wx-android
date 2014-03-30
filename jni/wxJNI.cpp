@@ -23,7 +23,9 @@ wxMotionEvent* TouchEvent;
 jmethodID add_view;
 jclass cl_ll;
 jobject c_l;
+wxMenu* menu = new wxMenu();
 char coords[32];
+
 
 jint
 Java_com_example_hellojni_wxJNI_wxStart( JNIEnv* env,
@@ -102,5 +104,14 @@ Java_com_example_hellojni_wxJNI_handleEvent( JNIEnv* env,jobject thiz,
 		    break;
 
 	}
+}
 
+void
+Java_com_example_hellojni_wxJNI_onCreateOMenu( JNIEnv* env,jobject thiz,
+													  jobject obj)
+{
+	// Here we should read our data from setMenu(xxx); and add them all op to obj, however for show off purpose we don't do that at all :(
+	wxAndroidApp::JNIEnv = env;
+	menu->setObject(obj);
+	menu->AppendCheckItem(0, env->NewStringUTF("Hello wxMenu"));
 }

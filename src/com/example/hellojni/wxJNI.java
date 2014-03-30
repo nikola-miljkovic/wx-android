@@ -16,6 +16,9 @@
 package com.example.hellojni;
 
 import android.app.Activity;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -34,14 +37,15 @@ public class wxJNI extends Activity implements OnClickListener {
          * the text is retrieved by calling a native
          * function.
          */
+       
         int i = wxStart("wxButton");
         System.out.println(i);
     }
 
     
     private native int wxStart(String label);
-    // not sure if static actually does anything here?
     public native void handleEvent(int code, Object obj);
+    public native void onCreateOMenu(Object obj);
     
     static {
         System.loadLibrary("wxJNI");
@@ -49,12 +53,23 @@ public class wxJNI extends Activity implements OnClickListener {
     
     @Override
 	public void onClick(View arg0) {
-		handleEvent(1, arg0);
+    	handleEvent(1, arg0);
 	}
     
-   @Override
+    @Override
     public boolean onTouchEvent(MotionEvent event) {
     	handleEvent(2, event);
      	return true;
     }
+   
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+    	onCreateOMenu(menu);
+    	/*MenuItem a = menu.add(0, 0, 0, "HI");
+    	a.setCheckable(true);
+		a.setChecked(false);*/
+		//a.setOnMenuItemClickListener();
+		
+		return true;
+	}
 }

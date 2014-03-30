@@ -21,6 +21,7 @@
 #include <wxandroid/textctrl.cpp>
 #include <wxandroid/notificationmsg.cpp>
 #include <wxandroid/motionevent.cpp>
+#include <wxandroid/menu.cpp>
 #include <android/log.h>
 
 #ifndef __wx_jni
@@ -69,6 +70,10 @@ void
 Java_com_example_hellojni_wxJNI_handleEvent( JNIEnv* env,
 													  jobject thiz,
 													  jint code,
+													  jobject obj);
+
+void
+Java_com_example_hellojni_wxJNI_onCreateOMenu( JNIEnv* env,jobject thiz,
 													  jobject obj);
 
 #ifdef __cplusplus

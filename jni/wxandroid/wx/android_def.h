@@ -10,9 +10,12 @@
 // activity
 #define BIND_ACTIVITY			"android/app/Activity"
 
+#define FILL_PARENT			0xffffffff
 // parents
 #define BIND_LINEAR_LAYOUT 	"android/widget/LinearLayout"
 
+#define BIND_MENU_VIEW			"android.view.Menu"
+#define BIND_MENU_ADD_ARGS     "(IIILjava/lang/CharSequence;)Landroid/view/MenuItem;"
 // child components
 #define BIND_BUTTON 			"android/widget/Button"
 
