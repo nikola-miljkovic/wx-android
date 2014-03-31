@@ -35,40 +35,47 @@ Java_com_example_hellojni_wxJNI_wxStart( JNIEnv* env,
 	wxAndroidApp::Activity = env->NewGlobalRef(thiz);
 	wxAndroidApp::OptionsMenuClick = NULL;
 
-	jclass this_c = env->GetObjectClass(thiz);
-	cl_ll = env->FindClass("android/widget/LinearLayout");
+	if(wxAndroidApp::ActivityStack.size() == 0) {
+		jclass this_c = env->GetObjectClass(thiz);
+		cl_ll = env->FindClass("android/widget/LinearLayout");
 
-	btn = new wxButton();
-	btn->SetLabel(env->NewStringUTF("Button one"));
+		btn = new wxButton();
+		btn->SetLabel(env->NewStringUTF("Button one"));
 
-	btn2 = new wxButton();
-	btn2->SetLabel(env->NewStringUTF("Button two"));
+		btn2 = new wxButton();
+		btn2->SetLabel(env->NewStringUTF("Button two"));
 
-	textctrl= new wxTextCtrl();
-	textctrl->SetText(label);
+		textctrl= new wxTextCtrl();
+		textctrl->SetText(label);
 
-	jmethodID construct = env->GetMethodID(cl_ll, "<init>", "(Landroid/content/Context;)V");
-	jmethodID setContent = env->GetMethodID(this_c, "setContentView", "(Landroid/view/View;)V");
-	jmethodID setOrientation = env->GetMethodID(cl_ll, "setOrientation", "(I)V");
-	add_view = env->GetMethodID(cl_ll, "addView", "(Landroid/view/View;)V");
+		jmethodID construct = env->GetMethodID(cl_ll, "<init>", "(Landroid/content/Context;)V");
+		jmethodID setContent = env->GetMethodID(this_c, "setContentView", "(Landroid/view/View;)V");
+		jmethodID setOrientation = env->GetMethodID(cl_ll, "setOrientation", "(I)V");
+		add_view = env->GetMethodID(cl_ll, "addView", "(Landroid/view/View;)V");
 
-	// construct layout and button
-	c_l = env->NewGlobalRef(env->NewObject(cl_ll, construct, thiz));
+		// construct layout and button
+		c_l = env->NewGlobalRef(env->NewObject(cl_ll, construct, thiz));
 
-	//Instantiates a wxNotificationMsg object with the desired text and duration
-	wxNotificationMsg* newNotification=new wxNotificationMsg(env->NewStringUTF("wxNotificationMsg"),NOTIFICATION_DURATION_SHORT);
+		//Instantiates a wxNotificationMsg object with the desired text and duration
+		wxNotificationMsg* newNotification=new wxNotificationMsg(env->NewStringUTF("wxNotificationMsg"),NOTIFICATION_DURATION_SHORT);
 
-	env->CallVoidMethod(c_l, setOrientation, 1);
-	env->CallVoidMethod(c_l, add_view, (jobject)(*textctrl));
-	env->CallVoidMethod(c_l, add_view, (jobject)(*btn));
-	env->CallVoidMethod(c_l, add_view, (jobject)(*btn2));
+		env->CallVoidMethod(c_l, setOrientation, 1);
+		env->CallVoidMethod(c_l, add_view, (jobject)(*textctrl));
+		env->CallVoidMethod(c_l, add_view, (jobject)(*btn));
+		env->CallVoidMethod(c_l, add_view, (jobject)(*btn2));
 
-	env->CallVoidMethod(thiz, setContent, c_l);
-	//Shows the previously constructed wxNotificationMsg
-	newNotification->show();
+		env->CallVoidMethod(thiz, setContent, c_l);
+		//Shows the previously constructed wxNotificationMsg
+		newNotification->show();
 
-	TouchEvent = new wxMotionEvent();
-	return 0;
+		TouchEvent = new wxMotionEvent();
+	}
+	else {
+
+	}
+
+	wxAndroidApp::ActivityStack.push(&thiz);
+	return wxAndroidApp::ActivityStack.size();
 }
 
 void
@@ -83,6 +90,9 @@ Java_com_example_hellojni_wxJNI_handleEvent( JNIEnv* env,jobject thiz,
 	        	textctrl->SetText(env->NewStringUTF("Event one"));
 	        	wxNotificationMsg* EventNotification=new wxNotificationMsg(env->NewStringUTF("Event one"),NOTIFICATION_DURATION_LONG);
 	        	EventNotification->show();
+
+	        	jmethodID method = env->GetMethodID(env->GetObjectClass(wxAndroidApp::Activity), "startNew", "()V");
+	        	env->CallVoidMethod(wxAndroidApp::Activity, method);
 	        }
 		    else if(env->IsSameObject(obj,jobject(*btn2)))
 		    {

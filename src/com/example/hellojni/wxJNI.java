@@ -16,6 +16,7 @@
 package com.example.hellojni;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
@@ -40,7 +41,6 @@ public class wxJNI extends Activity implements OnClickListener {
         
         
         int i = wxStart("wxButton");
-        System.out.println(i);
     }
 
     
@@ -68,4 +68,9 @@ public class wxJNI extends Activity implements OnClickListener {
     	onCreateOMenu(menu);
 		return true;
 	}
+    
+    public void startNew() {
+    	Intent intent = new Intent(this, wxJNI.class);
+    	startActivity(intent);
+    }
 }
