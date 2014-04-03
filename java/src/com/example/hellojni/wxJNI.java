@@ -50,6 +50,7 @@ public class wxJNI extends Activity implements OnClickListener {
     
     static {
         System.loadLibrary("wxJNI");
+        System.loadLibrary("wxAPP");
     }   
     
     @Override

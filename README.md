@@ -25,6 +25,11 @@ This project so far should work with Linux even tho i didn't test it.
 
 Use make-jni.py especially on windows.
 
+BUILD GUIDE
+==========
+
+Run make-jni.py or simply make with terminal. Copy newly made ../libs/ to your project/jni/lib, add include files and use makefiles from sample project.
+
 F.A.Q.
 ==========
 

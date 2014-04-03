@@ -14,6 +14,7 @@
  * limitations under the License.
  *
  */
+
 #include <jni.h>
 #include <stdio.h>
 #include <string.h>
@@ -48,9 +49,27 @@ extern "C" {
 	#define ABI "unknown"
 #endif
 
+#define WXDLLEXPORT _declspec(dllexport)
 
 #define LOGI(...) ((void)__android_log_print(ANDROID_LOG_INFO, "native-activity", __VA_ARGS__))
 #define LOGW(...) ((void)__android_log_print(ANDROID_LOG_WARN, "native-activity", __VA_ARGS__))
+
+jint load(JavaVM* vm, void* reserved)
+{
+	JNIEnv* env;
+	if (vm->GetEnv(reinterpret_cast<void**>(&env), JNI_VERSION_1_6) != JNI_OK) {
+		return -1;
+	}
+	return JNI_VERSION_1_6;
+}
+
+void setApp(wxApp* application);
+
+#define IMPLEMENT_APP(appname) \
+		jint JNI_OnLoad(JavaVM* vm, void* reserved) { 		\
+		setApp(new appname); \
+		LOGW("wxWidgets!11"); return load(vm, reserved); }
+
 
 
 /* This is a trivial JNI example where we use a native method

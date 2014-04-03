@@ -26,6 +26,9 @@ jobject c_l;
 wxMenu* menu = new wxMenu();
 char coords[32];
 
+void setApp(wxApp* application) {
+	wxAndroidApp::Application = application;
+}
 
 jint
 Java_com_example_hellojni_wxJNI_wxStart( JNIEnv* env,
@@ -36,6 +39,11 @@ Java_com_example_hellojni_wxJNI_wxStart( JNIEnv* env,
 	wxAndroidApp::OptionsMenuClick = NULL;
 
 	if(wxAndroidApp::ActivityStack.size() == 0) {
+		if(wxAndroidApp::Application) {
+			LOGW("APP != NULL");
+			wxAndroidApp::Application->onStart();
+		}
+
 		jclass this_c = env->GetObjectClass(thiz);
 		cl_ll = env->FindClass("android/widget/LinearLayout");
 

@@ -7,6 +7,8 @@
     <application android:label="@string/app_name">
         <activity android:name=".wxJNI"
                   android:label="@string/app_name">
+            <meta-data android:name="android.app.lib_name"
+                    android:value="mainwx" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
