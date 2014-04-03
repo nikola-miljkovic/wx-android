@@ -1,6 +1,6 @@
-#ifndef __android_def
-#include <wxandroid/wx/android_object.h>
-#endif
+#include <wx/android_def.h>
+#include <wx/android_object.h>
+#include <wx/app.h>
 
 //
 // PROOF OF CONCEPT NOT FINAL IMPLEMENTATION

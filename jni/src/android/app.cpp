@@ -11,12 +11,12 @@ class wxApp {
 
 namespace wxAndroidApp
 {
-	extern JNIEnv* JNIEnv;
-	extern jobject Activity;
-	extern jobject OptionsMenuClick;
+	JNIEnv* JNIEnv;
+	jobject Activity;
+	jobject OptionsMenuClick;
 
-	extern wxApp* Application;
-	extern std::stack<jobject*> ActivityStack;
+	wxApp* Application;
+	std::stack<jobject*> ActivityStack;
 };
 
 #endif // __WX_APP
