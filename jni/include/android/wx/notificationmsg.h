@@ -4,9 +4,11 @@
  *  Created on: Mar 27, 2014
  *      Author: Melroy Tellis
  */
-#ifndef __android_def
-#include <wxandroid/wx/android_object.h>
-#endif
+
+#include <wx/android_object.h>
+#include <wx/android_def.h>
+#include <wx/app.h>
+
 #define NOTIFICATION_DURATION_SHORT 0
 #define NOTIFICATION_DURATION_LONG 1
 class wxNotificationMsg : wxAndroidObject
