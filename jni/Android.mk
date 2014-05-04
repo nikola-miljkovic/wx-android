@@ -4,8 +4,8 @@ SOURCE_PATH := $(LOCAL_PATH)/src/android/
 include $(CLEAR_VARS)
 
 LOCAL_MODULE    := wxAndroid
-LOCAL_SRC_FILES := $(SOURCE_PATH)/app.cpp\
-    $(SOURCE_PATH)/wxjni.cpp\
+LOCAL_SRC_FILES := $(SOURCE_PATH)/wxjni.cpp\
+	$(SOURCE_PATH)/app.cpp\
     $(SOURCE_PATH)/android_object.cpp\
     $(SOURCE_PATH)/textctrl.cpp\
     $(SOURCE_PATH)/button.cpp\

@@ -1,17 +1,23 @@
-#include "jni.h"
-#include <stack>
-
 #ifndef __WX_APP
 #define __WX_APP
+
+#include <jni.h>
+#include <stack>
+
+#define IMPLEMENT_APP(appname) \
+		jint JNI_OnLoad(JavaVM* vm, void* reserved) { 		\
+		setApp(new appname); \
+		return load(vm, reserved); }
+
 
 class wxApp {
 	public:
 		virtual void OnInit() = 0;
 };
 
-namespace wxAndroidApp
+namespace wxAppMgr
 {
-	extern JNIEnv* JNIEnv;
+	extern JNIEnv* Env;
 	extern jobject Activity;
 	extern jobject OptionsMenuClick;
 

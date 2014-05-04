@@ -5,9 +5,8 @@
  *      Author: Melroy Tellis
  */
 
-#ifndef __android_def
-#include <wxandroid/wx/android_object.h>
-#endif
+#include <wx/android_object.h>
+#include <wx/app.h>
 
 #ifndef MOTIONEVENT_H_
 #define MOTIONEVENT_H_

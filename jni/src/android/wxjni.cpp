@@ -17,38 +17,38 @@
 #include <wx/wxjni.h>
 
 void setApp(wxApp* application) {
-	wxAndroidApp::Application = application;
+	wxAppMgr::Application = application;
 }
 
 jint
-Java_com_example_hellojni_wxJNI_wxStart( JNIEnv* env,
-													  jobject thiz ,jstring label)
+Java_org_wxwidgets_MainActivity_wxStart( JNIEnv* env,
+													  jobject thiz)
 {
-	wxAndroidApp::JNIEnv = env;
-	wxAndroidApp::Activity = env->NewGlobalRef(thiz);
-	wxAndroidApp::OptionsMenuClick = NULL;
+	wxAppMgr::Env = env;
+	wxAppMgr::Activity = env->NewGlobalRef(thiz);
+	wxAppMgr::OptionsMenuClick = NULL;
 
-	if(wxAndroidApp::ActivityStack.size() == 0) {
-		if(wxAndroidApp::Application) {
-			wxAndroidApp::Application->OnInit();
+	if(wxAppMgr::ActivityStack.size() == 0) {
+		if(wxAppMgr::Application) {
+			wxAppMgr::Application->OnInit();
 		}
 	}
 	else {
 
 	}
 
-	wxAndroidApp::ActivityStack.push(&thiz);
-	return wxAndroidApp::ActivityStack.size();
+	wxAppMgr::ActivityStack.push(&thiz);
+	return wxAppMgr::ActivityStack.size();
 }
 
 void
-Java_com_example_hellojni_wxJNI_handleEvent( JNIEnv* env,jobject thiz,
+Java_org_wxwidgets_MainActivity_handleEvent( JNIEnv* env,jobject thiz,
 													  jint code,jobject obj)
 {
 }
 
 void
-Java_com_example_hellojni_wxJNI_onCreateOMenu( JNIEnv* env,jobject thiz,
+Java_org_wxwidgets_MainActivity_onCreateOMenu( JNIEnv* env,jobject thiz,
 													  jobject obj)
 {
 }

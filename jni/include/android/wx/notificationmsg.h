@@ -16,7 +16,7 @@ class wxNotificationMsg : wxAndroidObject
     public:
         wxNotificationMsg(jstring text,jint duration);
         ~wxNotificationMsg()
-        { wxAndroidApp::JNIEnv->DeleteGlobalRef(m_object); }
+        { wxAppMgr::Env->DeleteGlobalRef(m_object); }
 
 	    void show();
 	    operator jobject() { return m_object; }

@@ -12,7 +12,7 @@ class wxButton : wxAndroidObject
 public:
 	wxButton();
 	~wxButton()
-	{ wxAndroidApp::JNIEnv->DeleteGlobalRef(m_object); }
+	{ wxAppMgr::Env->DeleteGlobalRef(m_object); }
 
 	void SetLabel(jstring label);
 

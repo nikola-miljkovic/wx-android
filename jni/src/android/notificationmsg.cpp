@@ -11,15 +11,15 @@
 //a toast object with the required text and duration
 wxNotificationMsg::wxNotificationMsg(jstring text,jint duration)
 {
-	JNIEnv* env = wxAndroidApp::JNIEnv;
+	JNIEnv* env = wxAppMgr::Env;
 	m_class = env->FindClass(BIND_TOAST);
 	jmethodID makeTextMethod=env->GetStaticMethodID(m_class,"makeText","(Landroid/content/Context;Ljava/lang/CharSequence;I)Landroid/widget/Toast;");
-	m_object=env->NewGlobalRef(env->CallStaticObjectMethod(m_class, makeTextMethod, wxAndroidApp::Activity, text, duration));
+	m_object=env->NewGlobalRef(env->CallStaticObjectMethod(m_class, makeTextMethod, wxAppMgr::Activity, text, duration));
 }
 
 void wxNotificationMsg::show()
 {
-	JNIEnv* env = wxAndroidApp::JNIEnv;
+	JNIEnv* env = wxAppMgr::Env;
 	jmethodID showMethod = env->GetMethodID(env->GetObjectClass(m_object), "show", "()V");
 	env->CallVoidMethod(m_object, showMethod);
 }

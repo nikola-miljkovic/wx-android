@@ -1,17 +1,9 @@
-#include "jni.h"
-#include <stack>
+#include <jni.h>
+#include <wx/app.h>
 
-#ifndef __WX_APP
-#define __WX_APP
-
-class wxApp {
-	public:
-		virtual void OnInit() = 0;
-};
-
-namespace wxAndroidApp
+namespace wxAppMgr
 {
-	JNIEnv* JNIEnv;
+	JNIEnv* Env;
 	jobject Activity;
 	jobject OptionsMenuClick;
 
@@ -19,4 +11,3 @@ namespace wxAndroidApp
 	std::stack<jobject*> ActivityStack;
 };
 
-#endif // __WX_APP

@@ -13,7 +13,7 @@
 #define BIND_MENU_VIEW			"android/view/Menu"
 #define BIND_MENU_ADD_ARGS     "(IIILjava/lang/CharSequence;)Landroid/view/MenuItem;"
 
-#define BIND_OPTIONS_MENU_CLICK "com/example/hellojni/OptionsMenuClick"
+#define BIND_OPTIONS_MENU_CLICK "org/wxwidgets/OptionsMenuClick"
 #define BIND_MENU_ONCLICKLISTENER_ARGS "(Landroid/view/MenuItem$OnMenuItemClickListener;)Landroid/view/MenuItem;"
 // child components
 #define BIND_BUTTON 			"android/widget/Button"

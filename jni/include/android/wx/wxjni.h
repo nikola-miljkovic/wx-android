@@ -14,6 +14,8 @@
  * limitations under the License.
  *
  */
+#ifndef __WX_JNI
+#define __WX_JNI
 
 #include <jni.h>
 
@@ -23,9 +25,6 @@
 #include <wx/app.h>
 
 #include <android/log.h>
-
-#ifndef __WX_JNI
-#define __WX_JNI
 
 #ifdef __cplusplus
 extern "C" {
@@ -65,24 +64,20 @@ jint load(JavaVM* vm, void* reserved)
 
 void setApp(wxApp* application);
 
-#define IMPLEMENT_APP(appname) \
-		jint JNI_OnLoad(JavaVM* vm, void* reserved) { 		\
-		setApp(new appname); \
-		return load(vm, reserved); }
 
 jint
-Java_com_example_hellojni_wxJNI_wxStart( JNIEnv* env,
-													  jobject thiz ,jstring label);
+Java_org_wxwidgets_MainActivity_wxStart( JNIEnv* env,
+													  jobject thiz);
 
 
 void
-Java_com_example_hellojni_wxJNI_handleEvent( JNIEnv* env,
+Java_org_wxwidgets_MainActivity_handleEvent( JNIEnv* env,
 													  jobject thiz,
 													  jint code,
 													  jobject obj);
 
 void
-Java_com_example_hellojni_wxJNI_onCreateOMenu( JNIEnv* env,jobject thiz,
+Java_org_wxwidgets_MainActivity_onCreateOMenu( JNIEnv* env,jobject thiz,
 													  jobject obj);
 
 #ifdef __cplusplus

@@ -7,7 +7,7 @@ class wxMenu : wxAndroidObject
     public:
         wxMenu();
         ~wxMenu()
-        { wxAndroidApp::JNIEnv->DeleteGlobalRef(m_object); }
+        { wxAppMgr::Env->DeleteGlobalRef(m_object); }
 
         // imagine wxMenuItem* instead of void :P and wxstring instead of jstring
 	    void AppendCheckItem(int id,

@@ -1,4 +1,4 @@
-package com.example.hellojni;
+package org.wxwidgets;
 
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
